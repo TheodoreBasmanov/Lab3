@@ -1,0 +1,7 @@
+#!/bin/bash
+mkdir /home/test && 
+{
+echo "catalogue test was created succesfully">>report 
+touch /home/test/"$(date)"
+}
+ping www.net_nikogo.ru || echo $(date) " the host isn't available">>report
