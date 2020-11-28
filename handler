@@ -1,0 +1,38 @@
+#!/bin/bash
+(tail -f pipe) |
+numberCheck='^[-,+]?[0-9]+$'
+A=1
+MODE="summing"
+while true; do
+read LINE;
+case $LINE in
+QUIT)
+echo "Scripts ended normally."
+killall tail
+exit
+;;
++)
+MODE="summing"
+;;
+"*")
+MODE="multiplying"
+;;
+*)
+if ! [[ $LINE =~ $numberCheck ]]
+then
+echo "You should have inserted numbers. Scripts ended."
+killall tail
+exit
+else
+case $MODE in
+summing)
+let A=$A\+$LINE
+;;
+multiplying)
+let A=$A\*$LINE
+;;
+esac
+echo $A
+fi
+esac
+
