@@ -1,0 +1,36 @@
+#!/bin/bash
+echo $$ > .pid
+A=1
+MODE="summing"
+usr1()
+{
+MODE="summing"
+}
+usr2()
+{
+MODE="multiplying"
+}
+term()
+{
+MODE="stop"
+}
+trap 'usr1' USR1
+trap 'usr2' USR2
+trap 'term' TERM
+while true; do
+case $MODE in
+"summing")
+let A=$A\+2
+echo $A
+;;
+"multiplying")
+let A=$A\*2
+echo $A
+;;
+"stop")
+echo "Stopped normally by the signal."
+exit
+;;
+esac
+sleep 1
+done
