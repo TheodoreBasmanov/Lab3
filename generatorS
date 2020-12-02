@@ -1,17 +1,19 @@
 #!/bin/bash
 while true; do
-read LINE
-case $LINE in
-+)
+read LINE;
+if [[ $LINE == "+" ]]
+then
 kill -USR1 $(cat .pid)
-;;
-"*")
+else
+if [[ $LINE == "*" ]]
+then
 kill -USR2 $(cat .pid)
-;;
-TERM)
-kill SIGTERM $(cat .pid)
-*)
-:
-;;
-esac
+else
+if [[ $LINE == "TERM" ]]
+then
+kill -SIGTERM $(cat .pid)
+exit
+fi
+fi
+fi
 done
