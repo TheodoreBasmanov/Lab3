@@ -1,8 +1,4 @@
 #!/bin/bash
-./first 2>/dev/null
-./first 2>/dev/null | at now + 2 minutes 2>/dev/null
-tail -f report
-echo "5 * * * sat ./first" | crontab
 ./infinite&firstPID=$!
 ./infinite&secondPID=$!
 ./infinite&thirdPID=$!
