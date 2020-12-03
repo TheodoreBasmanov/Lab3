@@ -21,8 +21,9 @@ MODE="multiplying"
 else
 if ! [[ $LINE =~ $numberCheck ]]
 then
-echo $LINE "You should have inserted numbers. Scripts ended."
+echo $LINE "- isn't a number or a +, or a *. You should have inserted numbers or specific simbols. Scripts ended."
 killall tail
+killall "generator"
 exit
 else
 case $MODE in

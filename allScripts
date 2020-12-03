@@ -1,15 +1,11 @@
 #!/bin/bash
-#./first 2>/dev/null
-#./first 2>/dev/null | at now + 2 minute 2>/dev/null
-#tail -f report
-#add crontab thing, because I don't know how to get it working.
-firstPID=0
-./infinite &
-string=`top | grep infinite`
-echo $string
-stringarray=($string)
-firstPID=${stringarray[0]}
-echo $firstPID
-./infinite &
-./infinite &
-
+./first 2>/dev/null
+./first 2>/dev/null | at now + 2 minutes 2>/dev/null
+tail -f report
+echo "5 * * * sat ./first" | crontab
+./infinite&firstPID=$!
+./infinite&secondPID=$!
+./infinite&thirdPID=$!
+renice +11 -p $firstPID
+kill $thirdPID 2>/dev/null | at now +2 minute 2>/dev/null
+kill $firstPID 2>/dev/null; kill $secondPID 2>/dev/null | at now +3 minute 2>/dev/null
