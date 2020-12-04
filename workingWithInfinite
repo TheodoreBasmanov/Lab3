@@ -2,6 +2,6 @@
 ./infinite & firstPID=$!
 ./infinite & secondPID=$!
 ./infinite & thirdPID=$!
-renice +11 -p $firstPID 1>/dev/null
+renice +8 -p $firstPID 1>/dev/null
 at now +2 minutes 2>/dev/null <<< "kill $thirdPID" 2>/dev/null
 at now +3 minute 2>/dev/null <<< "kill $firstPID; kill $secondPID" 2>/dev/null
